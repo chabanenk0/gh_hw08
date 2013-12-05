@@ -32,12 +32,13 @@ class WelcomeController extends Controller
 
         $dql   = "SELECT a FROM AcmeDemoBundle:Post a";
         $query = $em->createQuery($dql);
+        $limitPerPage =  $this->container->getParameter('knp_paginator.page_range');
     
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query,
             $this->get('request')->query->get('page', 1)/*page number*/,
-            6/*limit per page*/
+            $limitPerPage/*limit per page*/
         );
 
         // parameters to template
