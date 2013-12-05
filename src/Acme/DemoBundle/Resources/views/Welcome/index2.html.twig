@@ -11,7 +11,9 @@
 
 {% block page_header %}
 <div class="page-header">
-    <h1>{% block headline %}Header pagination Header{% endblock headline %}</h1>
+    <h1>{% block headline %}Header
+       {{ knp_pagination_render(pagination) }}
+     Header{% endblock headline %}</h1>
     <form action='{{ path('_welcome') }}' method="post">
     {{ form_widget(form) }}
     </form>
@@ -21,8 +23,20 @@
 {% block content %}
 <div class="col-sm-9">
 {% block content_content %}
+{# total items count #}
+<div class="count">
+    {{ pagination.getTotalItemCount }}
+</div>
+
 <strong>Posts </strong>
-{% for post in posts %}
+<p> sorting by:
+<tr>
+{# sorting of properties based on query components #}
+    <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+    <th{% if pagination.isSorted('a.message') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'message', 'a.message') }}</th>
+</tr>
+</p>
+{% for post in pagination %}
 <table>
 <tr>
 <td>Запись {{ post.id }} </td>
@@ -36,12 +50,16 @@
 </table>
 {% endfor %}
 
+{# display navigation #}
+
 {% endblock content_content %}
 </div>
 {% endblock content %}
 
 
 {% block footer %}
-<h1>Footer pagination Footer</h1>
+<h1>Footer 
+    {{ knp_pagination_render(pagination) }}
+Footer</h1>
 {% endblock footer %}
 

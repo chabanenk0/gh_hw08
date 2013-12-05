@@ -30,12 +30,26 @@ class WelcomeController extends Controller
             }
         }
 
-        $posts = $em->getRepository('AcmeDemoBundle:Post')->findAll();
+        $dql   = "SELECT a FROM AcmeDemoBundle:Post a";
+        $query = $em->createQuery($dql);
+    
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $this->get('request')->query->get('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        // parameters to template
+        //return $this->render('AcmeMainBundle:Article:list.html.twig', array('pagination' => $pagination));
+
+        //$posts = $em->getRepository('AcmeDemoBundle:Post')->findAll();
 
         return $this->render('AcmeDemoBundle:Welcome:index2.html.twig',array(
             'entity' => $post,
             'form' => $guestForm->createView(),
-            'posts' => $posts,
+            //'posts' => $posts,
+            'pagination' => $pagination
         ));
     }
 }
