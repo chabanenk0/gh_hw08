@@ -25,7 +25,17 @@ monolog:
             level: info
 
 assetic:
-    use_controller: true
+    bundle: [MopaBootstrapBundle,AcmeDemoBundle]
+    assets:
+        guestbook_css:
+            inputs:
+              - '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
+              - '%kernel.root_dir%/../src/Acme/DemoBundle/Resources/public/css/bootstrap.css'
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+mopa_bootstrap:
+    form: ~  # Adds twig form theme  support
+    menu: ~  # enables twig helpers for menu
+

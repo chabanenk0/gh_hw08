@@ -1,0 +1,47 @@
+{% extends 'MopaBootstrapBundle::base_css.html.twig' %}
+{% block head_style %}
+{% stylesheets '@guestbook_css' %}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+{% endstylesheets %}
+{% endblock head_style %}
+
+
+
+{% block title %}Guest Book demo{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+    <h1>{% block headline %}Header pagination Header{% endblock headline %}</h1>
+    <form action='{{ path('_welcome') }}' method="post">
+    {{ form_widget(form) }}
+    </form>
+</div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="col-sm-9">
+{% block content_content %}
+<strong>Posts </strong>
+{% for post in posts %}
+<table>
+<tr>
+<td>Запись {{ post.id }} </td>
+<td> <a href=' {{path('_postview',{'id':post.id}) }}'>просмотреть</a> </td>
+</tr>
+<tr>
+<td> {{ post.message}} </td>
+<td> <a href=' {{path('_postdelete',{'id':post.id}) }}'> удалить </td>
+</tr>
+<p>
+</table>
+{% endfor %}
+
+{% endblock content_content %}
+</div>
+{% endblock content %}
+
+
+{% block footer %}
+<h1>Footer pagination Footer</h1>
+{% endblock footer %}
+
