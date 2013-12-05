@@ -26,7 +26,7 @@ class WelcomeController extends Controller
                 $em->persist($post);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('category_show', array('id' => $post->getId())));
+                return $this->redirect($this->generateUrl('_welcome'));
             }
         }
 
@@ -37,7 +37,7 @@ class WelcomeController extends Controller
         $pagination = $paginator->paginate(
             $query,
             $this->get('request')->query->get('page', 1)/*page number*/,
-            10/*limit per page*/
+            6/*limit per page*/
         );
 
         // parameters to template
