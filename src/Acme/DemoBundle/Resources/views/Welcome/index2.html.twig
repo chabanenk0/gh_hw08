@@ -10,7 +10,8 @@
 {% block title %}Guest Book demo{% endblock %}
 
 {% block page_header %}
- <div class="page-header"> 
+
+ <div class="navbar navbar-inverse navbar-fixed-top"> 
     <h2 class="header">{% block headline %}Header
        {{ knp_pagination_render(pagination) }}
      Header{% endblock headline %}</h2>
@@ -25,10 +26,12 @@
  </div> 
 {% endblock page_header %}
 
+{% block content_div_start %}{% endblock content_div_start %}
+
 {% block content %}
 <div class="col-sm-9">
 {% block content_content %}
-
+<div class="content">
 <strong>Posts </strong>
 <p> sorting by:
 <tr>
@@ -51,17 +54,25 @@
 </table>
 {% endfor %}
 
-
+</div>
 {% endblock content_content %}
 </div>
 {% endblock content %}
 
+        {% block footer_tag_start %}
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+        {% endblock footer_tag_start %}
+
 
 {% block footer %}
-<div class="page-footer"> 
+<!-- <div class="page-footer">  -->
   <h2>Footer
     {{ knp_pagination_render(pagination) }}
   Footer  </h2>
-</div>
+<!-- </div> -->
 {% endblock footer %}
+
+        {% block footer_tag_end %}
+        </div>
+        {% endblock footer_tag_end %}
 
