@@ -47,7 +47,7 @@
 <td> <a href=' {{path('_postview',{'id':post.id}) }}'>просмотреть</a> </td>
 </tr>
 <tr>
-<td> {{ post.message}} </td>
+<td> {{ post.message[:100]}} ... </td>
 <td> <a href=' {{path('_postdelete',{'id':post.id}) }}'> удалить </td>
 </tr>
 <p>
